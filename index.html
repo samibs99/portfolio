@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sami Ben Slimene – Ingénieur Logiciel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07061a;--indigo:#4f46e5;--pink:#ff2e93;--cyan:#22d3ee;--amber:#fbbf24;--tx:#e8e8f5;--mute:#9a9ab8;--card:rgba(255,255,255,.045);--bd:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;cursor:none}
+h1,h2,h3,.logo{font-family:'Syne','DM Sans',sans-serif}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#0b0a24}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--pink),var(--indigo),var(--cyan));border-radius:10px}
+a{color:inherit;text-decoration:none;cursor:none}button{cursor:none}
+#bg{position:fixed;inset:0;z-index:0}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#dot,#ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
+#dot{width:8px;height:8px;background:var(--cyan);box-shadow:0 0 14px 4px var(--cyan)}
+#ring{width:38px;height:38px;border:1.5px solid var(--pink);transition:width .25s,height .25s,border-color .25s}
+#ring.big{width:60px;height:60px;border-color:var(--amber)}
+#loader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .6s,visibility .6s}
+#loader.off{opacity:0;visibility:hidden}
+#loader .ini{font:800 5rem 'Syne';background:linear-gradient(90deg,var(--pink),var(--cyan),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar{width:220px;height:4px;background:#1a1940;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--indigo),var(--pink),var(--cyan),var(--amber));background-size:200%;animation:load 1.9s ease forwards,flow 1s linear infinite}
+@keyframes load{to{width:100%}}@keyframes flow{to{background-position:200% 0}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;background:rgba(7,6,26,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);transform:translateY(-100%);animation:down .8s 2.1s forwards cubic-bezier(.2,.8,.2,1)}
+@keyframes down{to{transform:none}}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:.3px}
+nav ul{display:flex;gap:28px;list-style:none}
+nav ul a{position:relative;font-size:.95rem;color:var(--mute);padding:4px 0;transition:color .3s}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s}
+nav ul a:hover{color:var(--tx)}nav ul a:hover::after{width:100%}
+main{position:relative;z-index:2}
+section{padding:110px 6vw 70px;max-width:1240px;margin:auto}
+h2{font-size:clamp(2rem,4vw,2.9rem);margin-bottom:40px;font-weight:800}
+h2 span{background:linear-gradient(90deg,var(--pink),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rv.l{transform:translateX(-50px)}.rv.r{transform:translateX(50px)}
+.rv.in{opacity:1;transform:none}
+#hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:120px}
+.tag{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border:1px solid var(--bd);border-radius:50px;background:var(--card);font-size:.88rem;color:var(--mute)}
+.tag b{width:9px;height:9px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.5);opacity:.5}}
+h1{font-size:clamp(2.8rem,7vw,5.4rem);line-height:1.02;margin:22px 0 14px;font-weight:800;background:linear-gradient(100deg,var(--pink),var(--amber),var(--cyan),var(--indigo),var(--pink));background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 6s linear infinite}
+@keyframes shim{to{background-position:300% 0}}
+.sub{font-size:1.35rem;color:var(--cyan);font-weight:500;margin-bottom:14px}
+.lead{color:var(--mute);max-width:56ch;margin-bottom:30px}
+.btn{display:inline-block;padding:14px 30px;border-radius:50px;font-weight:700;transition:transform .3s,box-shadow .3s;margin:0 12px 12px 0}
+.btn.p{background:linear-gradient(90deg,var(--pink),var(--indigo));box-shadow:0 8px 30px rgba(255,46,147,.35)}
+.btn.s{border:1.5px solid var(--cyan);color:var(--cyan)}
+.btn:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(34,211,238,.35)}
+.stage{position:relative;display:grid;place-items:center;perspective:1000px;min-height:480px}
+.orb{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,var(--pink),var(--indigo) 55%,transparent 72%);filter:blur(60px);opacity:.55;animation:orb 7s ease-in-out infinite}
+@keyframes orb{50%{transform:scale(1.2) translateX(30px)}}
+.fcard{position:relative;width:min(340px,86vw);padding:34px 28px;border-radius:26px;background:rgba(20,18,60,.7);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);text-align:center;transform-style:preserve-3d;animation:spin3d 9s ease-in-out infinite;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+@keyframes spin3d{0%,100%{transform:rotateY(-16deg) rotateX(6deg) translateY(0)}50%{transform:rotateY(16deg) rotateX(-6deg) translateY(-18px)}}
+.av{position:relative;width:120px;height:120px;margin:0 auto 18px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--pink));font:800 2.4rem 'Syne'}
+.av::before{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px dashed var(--cyan);animation:rot 12s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.fcard h3{font-size:1.3rem}.fcard p{color:var(--cyan);font-size:.95rem;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stats div{padding:12px 4px;border-radius:14px;background:var(--card);border:1px solid var(--bd)}
+.stats b{display:block;font:800 1.5rem 'Syne';color:var(--amber)}.stats small{color:var(--mute);font-size:.75rem}
+.marq{overflow:hidden;border-block:1px solid var(--bd);padding:18px 0;position:relative;z-index:2;background:rgba(255,255,255,.02)}
+.mt{display:flex;gap:60px;width:max-content;animation:mq 26s linear infinite}
+.mt span{font:700 1.5rem 'Syne';color:transparent;-webkit-text-stroke:1px var(--mute);white-space:nowrap;transition:.3s}
+.mt span:hover{color:var(--pink);-webkit-text-stroke-color:var(--pink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.sk{display:grid;grid-template-columns:1fr 1fr;gap:18px 50px;margin-bottom:44px}
+.sk .t{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}.sk .t em{font-style:normal;color:var(--mute)}
+.track{height:9px;border-radius:9px;background:#17163a;overflow:hidden}
+.fill{position:relative;height:100%;width:0;border-radius:9px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.fill::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.7) 50%,transparent 70%);transform:translateX(-120%)}
+.fill.done::after{animation:sweep 1.2s .1s ease-out forwards}
+@keyframes sweep{to{transform:translateX(120%)}}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:8px 16px;border-radius:50px;border:1px solid var(--bd);background:var(--card);font-size:.88rem;transition:transform .3s,border-color .3s,box-shadow .3s}
+.chip:hover{transform:translateY(-8px);border-color:var(--c);box-shadow:0 10px 24px -8px var(--c)}
+.tl{position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px;background:linear-gradient(var(--pink),var(--cyan),var(--amber),var(--indigo),var(--pink));background-size:100% 300%;animation:gl 5s linear infinite}
+@keyframes gl{to{background-position:0 300%}}
+.job{position:relative;padding:26px 28px;margin-bottom:26px;border-radius:20px;background:var(--card);border:1px solid var(--bd);transition:transform .4s,box-shadow .4s,border-color .4s}
+.job::before{content:"";position:absolute;left:-43px;top:34px;width:15px;height:15px;border-radius:50%;background:var(--pink);box-shadow:0 0 14px var(--pink)}
+.job:hover{transform:translateX(12px)!important;border-color:var(--pink);box-shadow:0 0 36px rgba(255,46,147,.25)}
+.job h3{font-size:1.25rem}.job .m{color:var(--cyan);font-size:.92rem;margin:4px 0 12px}
+.job ul{margin:0 0 14px 18px;color:var(--mute);font-size:.95rem}.job li{margin-bottom:4px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badges span{padding:4px 12px;border-radius:50px;font-size:.78rem;background:rgba(251,191,36,.12);color:var(--amber);border:1px solid rgba(251,191,36,.3)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.proj{position:relative;overflow:hidden;padding:28px 24px;border-radius:20px;background:var(--card);border:1px solid var(--bd);transition:transform .4s,box-shadow .4s}
+.proj::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--pink),var(--amber),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.proj:hover{transform:translateY(-10px)!important;box-shadow:0 24px 50px -16px rgba(79,70,229,.6)}
+.proj:hover::before{transform:scaleX(1)}
+.proj .e{font-size:2.4rem;display:block;margin-bottom:10px}.proj h3{font-size:1.15rem;margin-bottom:8px}
+.proj p{color:var(--mute);font-size:.93rem;margin-bottom:16px}
+.proj .badges span{background:rgba(34,211,238,.1);color:var(--cyan);border-color:rgba(34,211,238,.3)}
+.ed{display:grid;grid-template-columns:1.3fr 1fr;gap:30px}
+.card{padding:26px;border-radius:20px;background:var(--card);border:1px solid var(--bd);margin-bottom:20px}
+.card h3{font-size:1.1rem}.card p{color:var(--mute);font-size:.93rem}.card .d{color:var(--amber);font-size:.88rem;margin:4px 0}
+.lang{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;margin-bottom:14px;border-radius:50px;background:var(--card);border:1px solid var(--bd);opacity:0;transform:scale(.8);transition:opacity .6s,transform .6s}
+.lang.in{opacity:1;transform:none}
+.lang b{padding:4px 14px;border-radius:50px;font-size:.82rem;background:linear-gradient(90deg,var(--indigo),var(--pink))}
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.ci{display:flex;align-items:center;gap:16px;padding:18px 22px;margin-bottom:16px;border-radius:18px;background:var(--card);border:1px solid var(--bd);transition:transform .35s,border-color .35s}
+.ci:hover{transform:translateX(14px)!important;border-color:var(--cyan)}
+.ci i{font-style:normal;font-size:1.5rem}.ci small{display:block;color:var(--mute);font-size:.78rem}
+.pul{position:relative;display:grid;place-items:center;min-height:360px}
+.pul .c{position:relative;z-index:2;width:130px;height:130px;border-radius:50%;display:grid;place-items:center;font:800 2.6rem 'Syne';background:linear-gradient(135deg,var(--pink),var(--indigo));animation:beat 2s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.08);box-shadow:0 0 50px var(--pink)}}
+.pul .rp{position:absolute;width:130px;height:130px;border-radius:50%;border:2px solid var(--cyan);opacity:0;animation:rip 3.6s ease-out infinite}
+.pul .rp:nth-child(2){animation-delay:1.2s;border-color:var(--pink)}.pul .rp:nth-child(3){animation-delay:2.4s;border-color:var(--amber)}
+@keyframes rip{0%{transform:scale(1);opacity:.8}100%{transform:scale(3.2);opacity:0}}
+footer{position:relative;z-index:2;text-align:center;padding:30px;color:var(--mute);font-size:.85rem;border-top:1px solid var(--bd)}
+@media(max-width:900px){#hero,.ed,.ct,.sk{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}nav ul{gap:14px}nav ul a{font-size:.82rem}.stage{min-height:420px}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}nav ul li:nth-child(n+4){display:none}section{padding:90px 5vw 50px}.tl{padding-left:26px}.job::before{left:-35px}}
+@media(hover:none){body,a,button{cursor:auto}#dot,#ring{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="loader"><div class="ini">SBS</div><div class="bar"><i></i></div></div>
+<canvas id="bg"></canvas><div class="noise"></div><div id="dot"></div><div id="ring"></div>
+
+<nav>
+  <a href="#hero" class="logo">Sami Ben Slimene</a>
+  <ul>
+    <li><a href="#skills">Compétences</a></li><li><a href="#experience">Expérience</a></li>
+    <li><a href="#projects">Projets</a></li><li><a href="#education">Formation</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+<section id="hero">
+  <div class="rv l">
+    <span class="tag"><b></b>Disponible pour de nouvelles opportunités</span>
+    <h1>Sami<br>Ben Slimene</h1>
+    <div class="sub">Ingénieur Logiciel · Full Stack</div>
+    <p class="lead">Ingénieur diplômé en Génie Logiciel, passionné par le développement Full Stack et la conception d’applications web modernes. Motivé et curieux, je cherche à progresser au sein d’une équipe technique.</p>
+    <a class="btn p" href="#projects">Voir mes projets</a><a class="btn s" href="#contact">Me contacter</a>
+  </div>
+  <div class="stage rv r">
+    <div class="orb"></div>
+    <div class="fcard">
+      <div class="av">SB</div>
+      <h3>Sami Ben Slimene</h3><p>Ingénieur Logiciel</p>
+      <div class="stats"><div><b>3</b><small>Stages</small></div><div><b>3</b><small>Projets</small></div><div><b>3</b><small>Langues</small></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq"><div class="mt" id="mq"></div></div>
+
+<section id="skills">
+  <h2 class="rv"><span>Compétences</span></h2>
+  <div class="sk" id="bars"></div>
+  <div class="chips rv" id="chips"></div>
+</section>
+
+<section id="experience">
+  <h2 class="rv"><span>Expérience</span></h2>
+  <div class="tl" id="jobs"></div>
+</section>
+
+<section id="projects">
+  <h2 class="rv"><span>Projets</span></h2>
+  <div class="grid" id="pj"></div>
+</section>
+
+<section id="education">
+  <h2 class="rv"><span>Formation & Langues</span></h2>
+  <div class="ed">
+    <div class="rv l">
+      <div class="card"><h3>Cycle d’ingénieur en Génie Logiciel</h3><div class="d">Sept. 2023 – Juil. 2026</div><p>Tek-up · Ariana, Tunisie</p></div>
+      <div class="card"><h3>Licence en Systèmes Embarqués</h3><div class="d">Sept. 2020 – Juil. 2023</div><p>Institut Supérieur d’Informatique et de Mathématiques · Monastir, Tunisie</p></div>
+    </div>
+    <div class="rv r">
+      <div class="lang"><span>Arabe</span><b>Courant</b></div>
+      <div class="lang"><span>Français</span><b>Intermédiaire</b></div>
+      <div class="lang"><span>Anglais</span><b>Intermédiaire</b></div>
+      <div class="chips" style="margin-top:22px">
+        <span class="chip" style="--c:var(--pink)">Résolution de problèmes complexes</span>
+        <span class="chip" style="--c:var(--cyan)">Esprit critique et d’analyse</span>
+        <span class="chip" style="--c:var(--amber)">Esprit d’équipe</span>
+        <span class="chip" style="--c:var(--indigo)">Échecs</span><span class="chip" style="--c:var(--pink)">Sports</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="rv"><span>Contact</span></h2>
+  <div class="ct">
+    <div class="rv l">
+      <a class="ci" href="mailto:benslimenesami4@gmail.com"><i>✉️</i><div><small>Email</small>benslimenesami4@gmail.com</div></a>
+      <a class="ci" href="tel:+21695663634"><i>📱</i><div><small>Téléphone</small>+216 95 663 634</div></a>
+      <div class="ci"><i>📍</i><div><small>Localisation</small>Ariana, Tunis</div></div>
+      <div class="ci"><i>🟢</i><div><small>Disponibilité</small>Disponible dès maintenant</div></div>
+      <a class="ci" href="https://www.linkedin.com/in/ben-slimene-sami" target="_blank" rel="noopener"><i>💼</i><div><small>LinkedIn</small>@ben-slimene-sami</div></a>
+      <a class="ci" href="https://github.com/samibs99" target="_blank" rel="noopener"><i>🐙</i><div><small>GitHub</small>@samibs99</div></a>
+    </div>
+    <div class="pul rv r"><span class="rp"></span><span class="rp"></span><span class="rp"></span><div class="c">SB</div></div>
+  </div>
+</section>
+</main>
+<footer>© 2026 Sami Ben Slimene</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const skills=[["Python",80,"--cyan"],["TypeScript / JavaScript",90,"--pink"],["PHP",75,"--amber"],["Next.js",90,"--cyan"],["React",90,"--pink"],["Angular",70,"--indigo"],["Laravel",80,"--amber"],["Django",75,"--cyan"],["NestJS",70,"--pink"],["Spring Boot",55,"--indigo"],["AWS",65,"--amber"],["Docker",85,"--cyan"],["Nginx",75,"--pink"],["GitHub Actions / GitLab CI/CD",80,"--indigo"],["Redis",75,"--amber"],["Kubernetes",55,"--cyan"],["Prometheus / Grafana",55,"--pink"]];
+$("#bars").innerHTML=skills.map(([n,v,c])=>`<div class="rv"><div class="t"><span>${n}</span><em>${v}%</em></div><div class="track"><div class="fill" data-w="${v}" style="background:var(${c})"></div></div></div>`).join("");
+const techs=["React","Next.js","Laravel","FastAPI","MySQL","PostgreSQL","Redis","Docker","Nginx","JWT","GitHub Actions","GitLab CI/CD","SEO","REST API","Node.js","Express.js","WebSocket","Sequelize","Django","NestJS","Angular","Python","TypeScript","PHP","Spring Boot","AWS","Kubernetes","Prometheus","Grafana","Arduino Mega"];
+const cols=["--pink","--cyan","--amber","--indigo"];
+$("#chips").innerHTML=techs.map((t,i)=>`<span class="chip" style="--c:var(${cols[i%4]})">${t}</span>`).join("");
+const jobs=[
+["Stage PFE (Ingénieur)","Wise Code","Khzema, Sousse","Fév. 2026 – Juil. 2026",["Conception d’une plateforme SaaS de gestion et de réservation en ligne « Rezervy » pour les établissements de beauté et de bien-être.","Authentification sécurisée JWT avec gestion des rôles et des permissions.","Modules Propriétaire, Client et Administration : établissements, services, collaborateurs, réservations, abonnements, promotions, tableaux de bord.","Microservice IA : recommandations personnalisées, prédiction du No-Show et chatbot d’assistance.","Cache Redis, SSR avec Next.js et optimisation SEO.","Conteneurisation Docker, CI/CD avec GitHub Actions, Nginx en reverse proxy."],["SaaS","JWT","IA / No-Show","Redis","CI/CD"]],
+["Stage d’été","Deevium","Network Coworking Space, Centre Urbain Nord","Juin 2025 – Sept. 2025",["Module de gestion de projets de traduction : projets et suivi des tâches.","Segmentation automatique des textes et édition collaborative en temps réel via WebSocket.","Assistance IA pour l’harmonisation stylistique et l’évaluation de la qualité des traductions.","Architecture backend basée sur des API."],["WebSocket","Temps réel","IA","FastAPI"]],
+["Stage PFE (Licence)","Ezzayra solution","Centre Urbain Nord","Fév. 2023 – Juin 2023",["Plateforme de test pour simuler, valider et évaluer des cartes électroniques dédiées à l’agriculture intelligente.","Capteurs d’humidité, de température et de luminosité connectés à une carte Arduino Mega.","Interface web de supervision : visualisation des mesures et analyse des données.","Communication entre le système embarqué et la plateforme web."],["Arduino Mega","IoT","React","Node.js"]]];
+$("#jobs").innerHTML=jobs.map(j=>`<article class="job rv"><h3>${j[0]} · ${j[1]}</h3><div class="m">${j[3]} · ${j[2]}</div><ul>${j[4].map(x=>`<li>${x}</li>`).join("")}</ul><div class="badges">${j[5].map(b=>`<span>${b}</span>`).join("")}</div></article>`).join("");
+const projs=[
+["💈","Rezervy","Plateforme SaaS multi-établissements de réservation en ligne pour la beauté et le bien-être, avec IA, cache Redis et déploiement automatisé (rezervy.io).",["React","Next.js","Laravel","FastAPI","MySQL","Redis","Docker"]],
+["☁️","Sandboxes éducatives Cloud","Gestion d’environnements de développement virtuels pour l’enseignement : provisionnement AWS isolé, chatbot IA, supervision pédagogique en temps réel et administration complète.",["Next.js","Django","PostgreSQL","Docker","AWS","GitLab CI/CD"]],
+["🛒","Application web e-commerce","Vente en ligne avec consultation des produits, commandes et suivi des achats, plus gestion des stocks, des commandes et des utilisateurs, et tableau de bord administrateur.",["NestJS","Angular","PostgreSQL"]],
+["🌐","Traduction collaborative","Plateforme collaborative de gestion de projets de traduction avec édition en temps réel et assistance IA.",["React","Next.js","Node.js","Express.js","FastAPI","WebSocket","Sequelize"]],
+["🌱","Supervision agricole embarquée","Plateforme web de supervision de systèmes embarqués agricoles avec capteurs temps réel sur Arduino Mega.",["React","Node.js","MySQL","Arduino Mega"]]];
+$("#pj").innerHTML=projs.map(p=>`<article class="proj rv"><span class="e">${p[0]}</span><h3>${p[1]}</h3><p>${p[2]}</p><div class="badges">${p[3].map(t=>`<span>${t}</span>`).join("")}</div></article>`).join("");
+const co=["Wise Code","Deevium","Ezzayra solution","Tek-up","ISIMM Monastir"];
+$("#mq").innerHTML=[...co,...co,...co,...co].map(c=>`<span>${c}</span>`).join("");
+
+// loader
+setTimeout(()=>$("#loader").classList.add("off"),2000);
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");const f=e.target.querySelector(".fill");if(f){f.style.width=f.dataset.w+"%";setTimeout(()=>f.classList.add("done"),1400)}io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv,.lang").forEach((el,i)=>{if(el.classList.contains("lang"))el.style.transitionDelay=(i%3)*.15+"s";io.observe(el)});
+document.querySelectorAll(".grid .proj").forEach((p,i)=>p.style.transitionDelay=(i%3)*.12+"s");
+document.querySelectorAll(".job,.proj,.ci").forEach(el=>el.addEventListener("transitionend",()=>{el.style.transitionDelay="0s"}));
+
+// cursor
+const dot=$("#dot"),ring=$("#ring");let mx=-100,my=-100,rx=-100,ry=-100;
+addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+"px";dot.style.top=my+"px"});
+(function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(loop)})();
+document.querySelectorAll("a,button,.chip,.job,.proj").forEach(el=>{el.addEventListener("mouseenter",()=>ring.classList.add("big"));el.addEventListener("mouseleave",()=>ring.classList.remove("big"))});
+
+// particles
+const cv=$("#bg"),cx=cv.getContext("2d"),pc=["#4f46e5","#ff2e93","#22d3ee","#fbbf24"];let W,H,P=[];
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(110,Math.floor(W*H/14000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*1.8+.8,c:pc[Math.floor(Math.random()*4)]}))}
+size();addEventListener("resize",size);
+(function draw(){cx.clearRect(0,0,W,H);
+for(let i=0;i<P.length;i++){const a=P[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+cx.beginPath();cx.arc(a.x,a.y,a.r,0,7);cx.fillStyle=a.c;cx.globalAlpha=.9;cx.fill();
+for(let j=i+1;j<P.length;j++){const b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.strokeStyle=a.c;cx.globalAlpha=(1-d/130)*.35;cx.lineWidth=.8;cx.stroke()}}}
+cx.globalAlpha=1;requestAnimationFrame(draw)})();
+</script>
+</body>
+</html>
